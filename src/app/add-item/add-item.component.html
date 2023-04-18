@@ -8,6 +8,6 @@
         <input id="url" type="text" [(ngModel)]="this.newItemUrl" />
     </span>
     <span>
-        <button type="button" (click)="addItem()">Add Item</button>
+        <button type="button" (click)="addItem()" [disabled]="!canSave">Add Item</button>
     </span>
 </div>

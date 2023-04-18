@@ -40,4 +40,35 @@ describe('AddItemComponent', () => {
       expect(unSpy.saveItem).toHaveBeenCalledWith({name: 'A Thing', url: 'http://google.com'})
     })
   })
+
+  describe('can save property', () => {
+    describe('should be false', () => {
+      it('if name is missing', () => {
+        component.newItemName = "";
+        component.newItemUrl = "http://test.org";
+
+        expect(component.canSave).toBeFalse();
+      })
+
+      it('if url is missing', () => {
+        component.newItemName = "name";
+        component.newItemUrl = "";
+
+        expect(component.canSave).toBeFalse();
+      })
+
+      it ('if url is completely bogus', () => {
+        component.newItemName = "name";
+        component.newItemUrl = "Hot sauce.";
+
+        expect(component.canSave).toBeFalse();
+      })
+    })
+    it('should be true if name and URL are not missing', () => {
+      component.newItemName = "Test";
+      component.newItemUrl = "http://www.google.com/";
+
+      expect(component.canSave).toBeTrue();
+    })
+  })
 });
