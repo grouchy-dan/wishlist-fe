@@ -4,6 +4,7 @@ import { AppComponent } from './app.component';
 import { ItemsComponent } from './items/items.component';
 import { ItemComponent } from './item/item.component';
 import { FormsModule } from '@angular/forms';
+import { AddItemComponent } from './add-item/add-item.component';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -15,7 +16,8 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent,
         ItemsComponent,
-        ItemComponent
+        ItemComponent,
+        AddItemComponent
       ],
     }).compileComponents();
   });
