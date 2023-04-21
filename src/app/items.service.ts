@@ -6,7 +6,6 @@ import { Observable, of } from 'rxjs';
   providedIn: 'root'
 })
 export class ItemsService {
-
   private _items: Item[] = [];
 
   constructor() { }
@@ -24,11 +23,17 @@ export class ItemsService {
         found.url = item.url;
       } else {
         throw "WTF";
-        // ignore it for now.
       }
     } else {
       item.id = (Math.random() * 10)
       this._items.push(item);
+    }
+  }
+
+  deleteItem(item: Item) {
+    const index = this._items.indexOf(item)
+    if (index >= 0) {
+      this._items.splice(index, 1);
     }
   }
 }

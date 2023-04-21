@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 
 import { ItemsService } from './items.service';
+import { firstValueFrom } from 'rxjs';
 
 describe('ItemsService', () => {
   let service: ItemsService;
@@ -22,5 +23,21 @@ describe('ItemsService', () => {
       expect(items[0].url).toBe("http://google.com");
       expect(items[0].id).not.toBeNull();
     })
+  })
+
+  it('should delete an item', async () => {
+    service.saveItem({name: "thing 1", url: "http://google.com"})
+    service.saveItem({name: "thing 2", url: "http://google.com"})
+    service.saveItem({name: "thing 3", url: "http://google.com"})
+
+    let items = await firstValueFrom(service.getItems());
+
+    service.deleteItem(items[1]);
+
+    let result = await firstValueFrom(service.getItems());
+
+    expect(result.length).toBe(2);
+    expect(result[0].name).toEqual("thing 1");
+    expect(result[1].name).toEqual("thing 3");
   })
 });

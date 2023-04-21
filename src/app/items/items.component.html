@@ -1,8 +1,15 @@
 <div>
     <app-add-item></app-add-item>
     <h2>Current Wishlist Items</h2>
+    <span>
+        <input type="checkbox" [(ngModel)]="editMode" id="editModeToggle">
+        <label for="editModeToggle">Enable cleanup mode</label>
+    </span>
     <ul>
         <li *ngFor="let item of items">
+            <span [hidden]="!editMode">
+                <button type="button" (click)="deleteItem(item)">Delete</button>
+            </span>
             <app-item [item]="item"></app-item>
         </li>
     </ul>

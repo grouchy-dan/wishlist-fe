@@ -8,6 +8,7 @@ import { ItemsService } from '../items.service';
   styleUrls: ['./items.component.less']
 })
 export class ItemsComponent implements OnInit {
+  editMode: boolean = false;
   constructor(private itemService: ItemsService) {}
 
   ngOnInit(): void {
@@ -15,6 +16,10 @@ export class ItemsComponent implements OnInit {
   }
 
   items: Item[] = [];
+
+  deleteItem(item: Item) {
+    this.itemService.deleteItem(item);
+  }
 
   private getItems(): void {
     this.itemService.getItems().subscribe(items => this.items = items);
